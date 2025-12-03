@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend/ops_copilot.db:/app/ops_copilot.db
+      - ./backend/models:/app/models
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+# Note: Frontend is mapped to 5173 to match the dev experience URL, 
+# but inside the container it runs on port 80 served by Nginx.

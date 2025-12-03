@@ -1,0 +1,85 @@
+{
+    "name": "Ops Copilot Notification",
+    "nodes": [
+        {
+            "parameters": {
+                "httpMethod": "POST",
+                "path": "notify",
+                "options": {}
+            },
+            "name": "Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "typeVersion": 1,
+            "position": [
+                460,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "channel": "ops-alerts",
+                "text": "={{$node[\"Webhook\"].json[\"body\"][\"message\"]}}",
+                "attachments": [],
+                "otherOptions": {}
+            },
+            "name": "Slack",
+            "type": "n8n-nodes-base.slack",
+            "typeVersion": 1,
+            "position": [
+                880,
+                300
+            ],
+            "credentials": {
+                "slackApi": {
+                    "id": "1",
+                    "name": "Slack Account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "keepOnlySet": true,
+                "values": {
+                    "string": [
+                        {
+                            "name": "message",
+                            "value": "🚨 *New Incident Report*\n\n*Ticket:* {{$node[\"Webhook\"].json[\"body\"][\"ticket\"][\"subject\"]}}\n*Priority:* {{$node[\"Webhook\"].json[\"body\"][\"analysis\"][\"priority\"]}}\n*Summary:* {{$node[\"Webhook\"].json[\"body\"][\"analysis\"][\"summary\"]}}"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "name": "Format Message",
+            "type": "n8n-nodes-base.set",
+            "typeVersion": 1,
+            "position": [
+                660,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook": {
+            "main": [
+                [
+                    {
+                        "node": "Format Message",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Format Message": {
+            "main": [
+                [
+                    {
+                        "node": "Slack",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

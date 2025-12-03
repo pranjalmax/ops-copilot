@@ -1,0 +1,20 @@
+[
+    {
+        "subject": "Cannot login to VPN",
+        "body": "Hi, I am getting a connection timeout when trying to connect to the VPN this morning. My internet is fine.",
+        "priority": "high",
+        "category": "network"
+    },
+    {
+        "subject": "Reset my 2FA please",
+        "body": "I lost my phone and need to reset my MFA authenticator app.",
+        "priority": "medium",
+        "category": "auth"
+    },
+    {
+        "subject": "Production API returning 503",
+        "body": "The main API endpoint is throwing 503 errors intermittently. Customers are complaining.",
+        "priority": "critical",
+        "category": "app"
+    }
+]
