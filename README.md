@@ -1,6 +1,8 @@
-# Ops Copilot
+# Ops Copilot 🤖🚀
 
-Agentic AI for IT Support. Classifies, enriches, and semi-automates support tickets.
+![Ops Copilot Demo](docs/media/ops_copilot_gif.gif)
+
+**Ops Copilot** is an intelligent, autonomous agent designed to revolutionize IT support. It doesn't just chat—it **works**.
 
 ## Features
 - **Classification**: Auto-tags category and priority.
